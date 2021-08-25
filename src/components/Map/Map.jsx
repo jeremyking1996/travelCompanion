@@ -7,7 +7,7 @@ import Rating from '@material-ui/lab/Rating'
 
 import useStyles from './styles';
 
-const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
+const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }) => {
     const classes = useStyles();
     const isDesktop = useMediaQuery('(min-width:600px');
     
@@ -27,7 +27,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
                     setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw});
                 }}
  
-                onChildClick={''}
+                onChildClick={(child) => setChildClicked(child)}
             >
                 {places?.mapContainer((place, i) => {
                     <div
@@ -36,6 +36,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
                     lng={Number(place.longitude)}
                     key={i}
                     >
+
                         {
                             isDesktop ? (
                                 <LocationOnOutlinedIcon color="primary" fontSize="large" />
@@ -57,7 +58,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
                         }
                     </div>
                 })}
-
+            
             </GoogleMapReact>
         </div>
     )
